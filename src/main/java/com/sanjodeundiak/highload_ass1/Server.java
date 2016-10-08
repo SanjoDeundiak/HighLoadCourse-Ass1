@@ -1,3 +1,7 @@
+package com.sanjodeundiak.highload_ass1;
+
+import com.sanjodeundiak.highload_ass1.dispatchers.IClientDispatcher;
+import com.sanjodeundiak.highload_ass1.dispatchers.ThreadPoolDispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +15,9 @@ import java.net.Socket;
 public class Server implements Runnable {
     protected int port;
     protected boolean stopped = false;
-    private IClientHandler handler;
+    private IClientDispatcher handler;
 
-    public Server(int port, IClientHandler handler) {
+    public Server(int port, IClientDispatcher handler) {
         this.port = port;
         this.handler = handler;
     }
@@ -47,15 +51,13 @@ public class Server implements Runnable {
             }
 
             try {
-                handler.handleClient(clientSocket);
+                handler.dispatchClient(clientSocket);
             }
             catch (IOException e) {
                 logger.error("Error handling clientSocket {}: {}", clientSocket.getInetAddress(), e);
             }
         }
     }
-
-
 
     protected ServerSocket openSocket() {
         try {
@@ -95,7 +97,8 @@ public class Server implements Runnable {
         int port = 8080;
         logger.debug("Creating server on port: {}", port);
 
-        Server server = new Server(port, new SimpleSingleThreadedClientHandler());
+//        Server server = new Server(port, new SingleThreadedDispatcher());
+        Server server = new Server(port, new ThreadPoolDispatcher());
         server.run();
     }
 }
