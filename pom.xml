@@ -37,5 +37,11 @@
             <version>${log4jVersion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>3.0.2.RELEASE</version>
+        </dependency>
+
     </dependencies>
 </project>
