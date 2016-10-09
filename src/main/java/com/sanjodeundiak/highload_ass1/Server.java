@@ -94,7 +94,7 @@ public class Server implements Runnable {
         Logger logger = LoggerFactory.getLogger(Server.class);
         logger.debug("Starting application");
 
-        int port = 8080;
+        int port = Settings.config.getInt("port");
         logger.debug("Creating server on port: {}", port);
 
 //        Server server = new Server(port, new SingleThreadedDispatcher());
