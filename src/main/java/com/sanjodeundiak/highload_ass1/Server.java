@@ -1,5 +1,6 @@
 package com.sanjodeundiak.highload_ass1;
 
+import com.sanjodeundiak.highload_ass1.configs.Settings;
 import com.sanjodeundiak.highload_ass1.dispatchers.IClientDispatcher;
 import com.sanjodeundiak.highload_ass1.dispatchers.ThreadPoolDispatcher;
 import org.slf4j.Logger;
@@ -94,7 +95,7 @@ public class Server implements Runnable {
         Logger logger = LoggerFactory.getLogger(Server.class);
         logger.debug("Starting application");
 
-        int port = Settings.config.getInt("port");
+        int port = Settings.getConfig().getInt("port");
         logger.debug("Creating server on port: {}", port);
 
 //        Server server = new Server(port, new SingleThreadedDispatcher());
